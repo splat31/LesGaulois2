@@ -7,6 +7,7 @@ public class Romain {
 	public Romain(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
+		assert this.force > 0;
 	}
 
 	public String getNom() {
@@ -22,16 +23,21 @@ public class Romain {
 	}
 
 	public void recevoirCoup(int forceCoup) {
+		assert this.force > 0 : "Pre-condition";
+		int forceDebut = this.force;
+		
 		force -= forceCoup;
 		if (force > 0) {
 			parler("Aie");
 		} else {
 			parler("J'abandonne...");
 		}
+		
+		assert this.force < forceDebut : "Post-condition";
 	}
 	
 	public static void main(String[] args) {
-		Romain Auguste = new Romain("Auguste", 10);
+		Romain Auguste = new Romain("Auguste", 8);
 		
 		Auguste.parler("Suis-je le premier ou bien le dernier empereurs?");
 		Auguste.recevoirCoup(8);
